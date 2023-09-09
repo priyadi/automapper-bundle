@@ -1,9 +1,9 @@
 {
-    "name": "jane-php/automapper-bundle",
+    "name": "jolicode/automapper-bundle",
     "type": "library",
-    "description": "Jane AutoMapper Symfony Bundle",
+    "description": "JoliCode AutoMapper Symfony Bundle",
     "keywords": ["bundle", "symfony"],
-    "homepage": "https://github.com/janephp/janephp",
+    "homepage": "https://github.com/jolicode/automapper-bundle",
     "license": "MIT",
     "authors": [
         {
@@ -16,32 +16,30 @@
         }
     ],
     "require": {
-        "php": "^7.3 || ^8.0",
-        "jane-php/automapper": "^7.0"
+        "php": "^8.2",
+        "jolicode/automapper": "dev-main"
     },
     "require-dev": {
+        "moneyphp/money": "^4.2",
         "phpunit/phpunit": "^8.0",
-        "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0"
+        "symfony/framework-bundle": "^6.0",
+        "symfony/uid": "^6.3",
+        "symfony/yaml": "^6.3"
     },
     "conflict": {
         "symfony/framework-bundle": "5.1.0"
     },
-    "extra": {
-        "branch-alias": {
-            "dev-next": "7-dev"
-        }
-    },
     "autoload": {
         "psr-4": {
-            "Jane\\Bundle\\AutoMapperBundle\\": ""
-        },
-        "exclude-from-classmap": [
-            "/Tests/"
-        ]
+            "AutoMapper\\Bundle\\": "src/"
+        }
     },
     "autoload-dev": {
+        "psr-4": {
+            "AutoMapper\\Bundle\\Tests\\": "tests/"
+        },
         "classmap": [
-            "Tests/Resources/app/AppKernel.php"
+            "tests/Resources/App/AppKernel.php"
         ]
     },
     "config": {

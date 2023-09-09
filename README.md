@@ -5,17 +5,17 @@ To use it, you just have to add the main bundle class to your `config/bundles.ph
 ```
 return [
     // ...
-    Jane\Bundle\AutoMapper\JaneAutoMapperBundle::class => ['all' => true],
+    AutoMapper\Bundle\AutoMapperBundle::class => ['all' => true],
 ];
 ```
 
 Then configure the bundle to your needs, for example:
 ```
-jane_auto_mapper:
+automapper:
   autoregister: true
   mappings:
-    - source: Jane\Bundle\AutoMapper\Tests\Fixtures\User
-      target: Jane\Bundle\AutoMapper\Tests\Fixtures\UserDTO
+    - source: AutoMapper\Bundle\Tests\Fixtures\User
+      target: AutoMapper\Bundle\Tests\Fixtures\UserDTO
       pass: DummyApp\UserConfigurationPass
 ```
 
@@ -23,7 +23,7 @@ Possible properties:
 - `normalizer` (default: `false`):  A boolean which indicate if we inject the AutoMapperNormalizer;
 - `cache_dir` (default: `%kernel.cache_dir%/automapper`): This settings allows you to customize the output directory for generated mappers;
 - `mappings`: This option allows you to customize Mapper metadata, you have to specify `source` & `target` data types and related configuration using `pass` field.
-This configuration should implements `Jane\Bundle\AutoMapper\Configuration\ConfigurationPassInterface`.
+This configuration should implements `AutoMapper\Bundle\Configuration\ConfigurationPassInterface`.
 - `allow_readonly_target_to_populate` (default: `false`): Will throw an exception if you use a readonly class as target to populate if set to `false`.
 
 ## Normalizer Bridge

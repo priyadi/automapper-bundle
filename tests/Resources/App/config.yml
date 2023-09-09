@@ -1,0 +1,18 @@
+framework:
+    secret: jane-automapper
+    property_info: ~
+    test: ~
+
+automapper:
+    normalizer: true
+    name_converter: DummyApp\IdNameConverter
+    warmup:
+      - { source: 'AutoMapper\Bundle\Tests\Fixtures\NestedObject', target: 'array' }
+
+services:
+  _defaults:
+    autoconfigure: true
+
+  DummyApp\UserMapperConfiguration: ~
+  DummyApp\IdNameConverter: ~
+  DummyApp\Transformer\MoneyTransformerFactory: ~
