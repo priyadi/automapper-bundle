@@ -13,24 +13,24 @@
         <service id="AutoMapper\AutoMapperRegistryInterface" alias="AutoMapper\Bundle\AutoMapper" public="true" />
 
         <service id="AutoMapper\Extractor\SourceTargetMappingExtractor">
-            <argument type="service" id="property_info" />
-            <argument type="service" id="AutoMapper\Extractor\MapToContextPropertyInfoExtractorDecorator" />
-            <argument type="service" id="property_info.reflection_extractor" />
+            <argument type="service" id="automapper.property_info" />
+            <argument type="service" id="automapper.property_info.reflection_extractor" />
+            <argument type="service" id="automapper.property_info.reflection_extractor" />
             <argument type="service" id="AutoMapper\Transformer\TransformerFactoryInterface" />
         </service>
 
         <service id="AutoMapper\Extractor\FromTargetMappingExtractor">
-            <argument type="service" id="property_info" />
-            <argument type="service" id="property_info.reflection_extractor" />
-            <argument type="service" id="property_info.reflection_extractor" />
+            <argument type="service" id="automapper.property_info" />
+            <argument type="service" id="automapper.property_info.reflection_extractor" />
+            <argument type="service" id="automapper.property_info.reflection_extractor" />
             <argument type="service" id="AutoMapper\Transformer\TransformerFactoryInterface" />
             <argument type="service" id="serializer.mapping.class_metadata_factory" />
         </service>
 
         <service id="AutoMapper\Extractor\FromSourceMappingExtractor">
-            <argument type="service" id="property_info" />
-            <argument type="service" id="AutoMapper\Extractor\MapToContextPropertyInfoExtractorDecorator" />
-            <argument type="service" id="property_info.reflection_extractor" />
+            <argument type="service" id="automapper.property_info" />
+            <argument type="service" id="automapper.property_info.reflection_extractor" />
+            <argument type="service" id="automapper.property_info.reflection_extractor" />
             <argument type="service" id="AutoMapper\Transformer\TransformerFactoryInterface" />
             <argument type="service" id="serializer.mapping.class_metadata_factory" />
         </service>
@@ -42,6 +42,7 @@
             <argument>Symfony_Mapper_</argument>
             <argument>true</argument>
             <argument></argument> <!-- Date time format -->
+            <argument></argument> <!-- map_private_properties -->
         </service>
         <service id="AutoMapper\MapperGeneratorMetadataFactoryInterface" alias="AutoMapper\MapperGeneratorMetadataFactory" />
 
@@ -118,11 +119,6 @@
         <service id="AutoMapper\Bundle\CacheWarmup\ConfigurationCacheWarmerLoader">
             <argument/> <!-- mappers list from config -->
             <tag name="automapper.cache_warmer_loader" />
-        </service>
-
-        <service id="AutoMapper\Extractor\MapToContextPropertyInfoExtractorDecorator">
-            <argument type="service" id="property_info.reflection_extractor" />
-            <tag name="property_info.access_extractor" priority="-100" />
         </service>
     </services>
 </container>
