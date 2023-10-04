@@ -5,16 +5,14 @@ namespace AutoMapper\Bundle\DependencyInjection;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-class Configuration implements ConfigurationInterface
+readonly class Configuration implements ConfigurationInterface
 {
-    private $debug;
-
     /**
      * @param bool $debug Whether debugging is enabled or not
      */
-    public function __construct(bool $debug)
-    {
-        $this->debug = $debug;
+    public function __construct(
+        private bool $debug,
+    ) {
     }
 
     public function getConfigTreeBuilder(): TreeBuilder

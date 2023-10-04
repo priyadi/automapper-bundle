@@ -11,7 +11,7 @@ class TransformerFactoryPass implements CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $definition = $container->getDefinition(ChainTransformerFactory::class);
 
