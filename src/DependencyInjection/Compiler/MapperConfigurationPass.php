@@ -11,7 +11,7 @@ class MapperConfigurationPass implements CompilerPassInterface
 {
     use PriorityTaggedServiceTrait;
 
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         $autoMapper = $container->getDefinition(AutoMapper::class);
 

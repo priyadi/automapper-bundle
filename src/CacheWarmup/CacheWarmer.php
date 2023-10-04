@@ -12,28 +12,20 @@ use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface;
  */
 final class CacheWarmer implements CacheWarmerInterface
 {
-    private $autoMapperRegistry;
-    /** @var iterable<CacheWarmerLoaderInterface> */
-    private $cacheWarmerLoaders;
-    private $autoMapperCacheDirectory;
-
     /** @param iterable<CacheWarmerLoaderInterface> $cacheWarmerLoaders */
     public function __construct(
-        AutoMapperRegistryInterface $autoMapperRegistry,
-        iterable $cacheWarmerLoaders,
-        string $autoMapperCacheDirectory
+        private readonly AutoMapperRegistryInterface $autoMapperRegistry,
+        private readonly iterable $cacheWarmerLoaders,
+        private readonly string $autoMapperCacheDirectory
     ) {
-        $this->autoMapperRegistry = $autoMapperRegistry;
-        $this->cacheWarmerLoaders = $cacheWarmerLoaders;
-        $this->autoMapperCacheDirectory = $autoMapperCacheDirectory;
     }
 
-    public function isOptional()
+    public function isOptional(): bool
     {
         return false;
     }
 
-    public function warmUp($cacheDir)
+    public function warmUp(string $cacheDir): array
     {
         foreach ($this->cacheWarmerLoaders as $cacheWarmerLoader) {
             foreach ($cacheWarmerLoader->loadCacheWarmupData() as $cacheWarmupData) {
