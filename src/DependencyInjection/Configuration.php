@@ -27,7 +27,7 @@ readonly class Configuration implements ConfigurationInterface
                 ->scalarNode('cache_dir')->defaultValue('%kernel.cache_dir%/automapper')->end()
                 ->scalarNode('date_time_format')->defaultValue(\DateTimeInterface::RFC3339)->end()
                 ->booleanNode('hot_reload')->defaultValue($this->debug)->end()
-                ->booleanNode('map_private_properties')->defaultTrue()->end()
+                ->booleanNode('map_private_properties')->defaultFalse()->end()
                 ->booleanNode('allow_readonly_target_to_populate')->defaultFalse()->end()
                 ->arrayNode('warmup')
                     ->arrayPrototype()
