@@ -6,6 +6,7 @@ framework:
 automapper:
     normalizer: true
     name_converter: DummyApp\IdNameConverter
+    map_private_properties: true
     warmup:
       - { source: 'AutoMapper\Bundle\Tests\Fixtures\NestedObject', target: 'array' }
 

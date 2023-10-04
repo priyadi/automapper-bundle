@@ -4,11 +4,14 @@ namespace AutoMapper\Bundle\Tests;
 
 use AutoMapper\AutoMapperInterface;
 use AutoMapper\Bundle\Tests\Fixtures\AddressDTO;
+use AutoMapper\Bundle\Tests\Fixtures\ClassWithMapToContextAttribute;
+use AutoMapper\Bundle\Tests\Fixtures\ClassWithPrivateProperty;
 use AutoMapper\Bundle\Tests\Fixtures\DTOWithEnum;
 use AutoMapper\Bundle\Tests\Fixtures\Order;
 use AutoMapper\Bundle\Tests\Fixtures\SomeEnum;
 use AutoMapper\Bundle\Tests\Fixtures\User;
 use AutoMapper\Bundle\Tests\Fixtures\UserDTO;
+use AutoMapper\MapperContext;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -116,5 +119,44 @@ class ServiceInstantiationTest extends WebTestCase
         $dto = new DTOWithEnum();
         $dto->enum = SomeEnum::FOO;
         self::assertSame(['enum' => 'foo'], $autoMapper->map($dto, 'array'));
+    }
+
+    /**
+     * This test validates that PropertyInfoPass is correctly applied.
+     */
+    public function testMapClassWithPrivateProperty(): void
+    {
+        static::bootKernel();
+        $container = static::$kernel->getContainer();
+        $autoMapper = $container->get(AutoMapperInterface::class);
+
+        self::assertEquals(
+            new ClassWithPrivateProperty('bar'),
+            $autoMapper->map(['foo' => 'bar'], ClassWithPrivateProperty::class)
+        );
+    }
+
+    /**
+     * We need to test that the mapToContext attribute is correctly used,
+     * because this behavior is dependent of the dependency injection.
+     */
+    public function testMapToContextAttribute(): void
+    {
+        static::bootKernel();
+        $container = static::$kernel->getContainer();
+        $autoMapper = $container->get(AutoMapperInterface::class);
+
+        self::assertSame(
+            [
+                'value' => 'foo_bar_baz',
+                'virtualProperty' => 'foo_bar_baz',
+                'propertyWithDefaultValue' => 'foo',
+            ],
+            $autoMapper->map(
+                new ClassWithMapToContextAttribute('bar'),
+                'array',
+                [MapperContext::MAP_TO_ACCESSOR_PARAMETER => ['suffix' => 'baz', 'prefix' => 'foo']]
+            )
+        );
     }
 }
