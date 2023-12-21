@@ -49,8 +49,8 @@ class PropertyInfoPass implements CompilerPassInterface
                         new Reference('automapper.property_info.reflection_extractor'),
                     ]),
                     new IteratorArgument([
-                        new Reference('property_info.php_doc_extractor'),
                         new Reference('automapper.property_info.reflection_extractor'),
+                        new Reference('property_info.php_doc_extractor'),
                     ]),
                     new IteratorArgument([
                         new Reference('automapper.property_info.reflection_extractor'),
